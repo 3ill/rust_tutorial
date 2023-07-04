@@ -16,9 +16,16 @@ enum Tint {
     Black,
 }
 
+//? create a dimensions struct
+struct Dimensions {
+    weight: f64,
+    height: f64,
+    depth: f64,
+}
+
 //? create a shipping Box struct
 struct Box {
-    dimensions: i32,
+    dimensions: Dimensions,
     weight: f64,
     color: Tint,
 }
@@ -28,16 +35,24 @@ impl Box {
     //? this function creates a new Box of the implementation type
     fn create_box() -> Self {
         Self {
-            dimensions: 23,
+            dimensions: Dimensions {
+                weight: 64.0,
+                height: 32.0,
+                depth: 15.0,
+            },
             weight: 64.0,
             color: Tint::Black,
         }
     }
 
     //? This function creates a new box by accepting variables
-    fn create_new_box(dm: i32, kg: f64, color: Tint) -> Self {
+    fn create_new_box(h: f64, dp: f64, kg: f64, color: Tint) -> Self {
         Self {
-            dimensions: dm,
+            dimensions: Dimensions {
+                weight: kg,
+                height: h,
+                depth: dp,
+            },
             weight: kg,
             color: color,
         }
@@ -52,8 +67,8 @@ impl Box {
         }
 
         println!(
-            "Box characteristics => {:?} dimensions, {:?} kg",
-            self.dimensions, self.weight
+            "Box characteristics =>  {:?} kg, {:?} height and , {:?} depth",
+            self.weight, self.dimensions.height, self.dimensions.depth
         );
     }
 }
@@ -62,9 +77,9 @@ fn main() {
     let new_box = Box::create_box();
     new_box.show_box_details();
 
-    let order = Box::create_new_box(4, 64.0, Tint::Green);
+    let order = Box::create_new_box(12.0, 15.0, 8.0, Tint::Green);
     order.show_box_details();
 
-    let order2 = Box::create_new_box(12, 89.0, Tint::Blue);
+    let order2 = Box::create_new_box(12.0, 89.0, 50.0, Tint::Blue);
     order2.show_box_details();
 }
